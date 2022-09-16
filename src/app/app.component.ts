@@ -10,7 +10,7 @@ import { EmployeeService } from './employee.service';
 })
 export class AppComponent implements OnInit {
   // check this line
-  public employees: Employee[] = [];
+  public employees!: Employee[];
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onOpenModal(employee: Employee, mode: string): void {
+  public onOpenModal(employee: Employee | null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
