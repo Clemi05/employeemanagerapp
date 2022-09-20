@@ -13,6 +13,14 @@ body {
   margin-bottom: 30px;
 }
 
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  font-weight: 500;
+}
+
 .w-60 {
   width: 60px;
 }

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
-// Restart at 1:52:00
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
