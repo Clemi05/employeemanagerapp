@@ -31,12 +31,16 @@ export class AppComponent implements OnInit {
   }
 
   public onAddEmployee(addForm: NgForm): void {
-    this.employeeService.addEmployee(addForm.value).subscribe(
-      (response: Employee) => {},
-      (error: HttpErrorResponse) => {
+    document.getElementById('add-employee-form')?.click();
+    this.employeeService.addEmployee(addForm.value).subscribe({
+      next: (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    );
+    });
   }
 
   public onOpenModal(employee: Employee | null, mode: string): void {
