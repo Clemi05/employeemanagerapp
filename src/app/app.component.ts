@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 
@@ -29,6 +30,15 @@ export class AppComponent implements OnInit {
     );
   }
 
+  public onAddEmployee(addForm: NgForm): void {
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {},
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   public onOpenModal(employee: Employee | null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -41,7 +51,7 @@ export class AppComponent implements OnInit {
         button.setAttribute('data-target', '#addEmployeeModal');
         break;
       case 'edit':
-        button.setAttribute('data-target', '#editEmployeeModal');
+        button.setAttribute('data-target', '#updateEmployeeModal');
         break;
       case 'delete':
         button.setAttribute('data-target', '#deleteEmployeeModal');
