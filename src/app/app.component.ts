@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   // check lines
   public employees!: Employee[];
   public editEmployee!: Employee | null;
+  public deleteEmployee!: Employee | null;
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -21,14 +22,14 @@ export class AppComponent implements OnInit {
   }
 
   public getEmployees(): void {
-    this.employeeService.getEmployees().subscribe(
-      (response: Employee[]) => {
+    this.employeeService.getEmployees().subscribe({
+      next: (response: Employee[]) => {
         this.employees = response;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    );
+    });
   }
 
   public onAddEmployee(addForm: NgForm): void {
@@ -58,6 +59,18 @@ export class AppComponent implements OnInit {
     });
   }
 
+  public onDeleteEmployee(employeeId: number): void {
+    this.employeeService.deleteEmployee(employeeId).subscribe({
+      next: (response: void) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
+  }
+
   public onOpenModal(employee: Employee | null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -74,9 +87,9 @@ export class AppComponent implements OnInit {
         button.setAttribute('data-target', '#updateEmployeeModal');
         break;
       case 'delete':
+        this.deleteEmployee = employee;
         button.setAttribute('data-target', '#deleteEmployeeModal');
         break;
-
       default:
         break;
     }
