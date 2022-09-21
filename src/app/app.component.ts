@@ -10,7 +10,7 @@ import { EmployeeService } from './employee.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  // check this line
+  // check lines
   public employees!: Employee[];
   public editEmployee!: Employee | null;
 
@@ -37,9 +37,11 @@ export class AppComponent implements OnInit {
       next: (response: Employee) => {
         console.log(response);
         this.getEmployees();
+        addForm.reset();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
+        addForm.reset();
       }
     });
   }
